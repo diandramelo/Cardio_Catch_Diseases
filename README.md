@@ -2,6 +2,8 @@
 
 Categorical classification forecast with Machine Learning.
 
+*(This README is under construction :D)*
+
 ![Image](https://www.mayo.edu/-/media/kcms/gbs/research/images/2019/04/11/19/11/research-cohort-8col-shu-162680969.jpg)
 
 *This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).*
@@ -16,12 +18,12 @@ Here is what I will cover:
 
 - [A brief introduction to CVDs](#a-brief-introduction-to-cdvs)
 - [Main outcomes](#main-outcomes)
-- [01. Business Problem](#01-business-problem)
-- [2. Data Description](#data-description)
-- [3. Feature Engineering](#feature-engineering)
-- [4. Exploratory Data Analysis](#exploratory-data-analysis)
-- [5. Machine Learning Models](#machine-learning-models)
-- [6. Business Performance](#business-performance)
+- [1. Business Problem](#1-business-problem)
+- [2. Data Description](#2-data-description)
+- [3. Feature Engineering](#3-feature-engineering)
+- [4. Exploratory Data Analysis](#4-exploratory-data-analysis)
+- [5. Machine Learning Models](#5-machine-learning-models)
+- [6. Business Performance](#6-business-performance)
 
 ## A brief introduction to CVDs
 
@@ -31,7 +33,7 @@ Here is what I will cover:
 
 *To do*
 
-## 01. Business Problem
+## 1. Business Problem
 
 Cadio Catch Diseases is a company specialist in detecting heart diseases in its early stages. Its business model is **As-a-Service**, which means that the company offers early diagnosis of cardiovascular disease for a certain price. The firm's price strategy is set as performance-based:
 
@@ -131,6 +133,24 @@ By analysing the available data and the mindmap shown above, it is possible to s
 *To do*
 
 ### 1. Univariate Analysis
+- **Target variable** (`cardio_disease`):
+  - Number of patients with CVD: 34,628
+  - Number of patients without CVD: 33,933
+![EDA_uni_target](img/EDA_uni_target.png)
+
+- **Numerical variables**:
+![EDA_uni_numerical](img/EDA_uni_numerical.png)
+
+Here some insights from the above graphs:
+- The dataset presents a concentration of patients aged 50 to 60;
+- The variable `height`distribution is concentrated around a height of 160cm;
+- The variable `weight` distribution is slightly shifted to the left (positive skew), and the data is concentrated around 70kg;
+- Systolic (`systolic_bp`) and Diastolic (`diastolic_bp`) measurements are concentrated around 120/80mmHg (normal blood pressure);
+- The `BMI` variable's distribution is slightly shifted to the left, concentrated around 25.
+
+- **Categorical variables**:
+![EDA_uni_categorical](img/EDA_uni_categorical.png)
+
 *To do*
 
 ### 2. Bivariate Analysis
