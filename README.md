@@ -1,1 +1,174 @@
 # Cardio_Catch_Diseases
+
+Categorical classification forecast with Machine Learning.
+
+*(This README is under construction :D)*
+
+![Image](https://www.mayo.edu/-/media/kcms/gbs/research/images/2019/04/11/19/11/research-cohort-8col-shu-162680969.jpg)
+
+*This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).*
+
+(INTRO)
+
+If you wish to check the coding for this project, access the Jupyter Notebook [here](v09-Cardio_Catch_Diseases.ipynb); there is also a Storytelling slide presentation available [here](Project_Storytelling.pdf)
+
+If you want a better understanding on the motivation for this project and a broad view of the main steps taken, then keep on reading!
+
+Here is what I will cover:
+
+- [A brief introduction to CVDs](#a-brief-introduction-to-cdvs)
+- [Main outcomes](#main-outcomes)
+- [1. Business Problem](#1-business-problem)
+- [2. Data Description](#2-data-description)
+- [3. Feature Engineering](#3-feature-engineering)
+- [4. Exploratory Data Analysis](#4-exploratory-data-analysis)
+- [5. Machine Learning Models](#5-machine-learning-models)
+- [6. Business Performance](#6-business-performance)
+
+## A brief introduction to CVDs
+
+*To do*
+
+## Main outcomes
+
+*To do*
+
+## 1. Business Problem
+
+Cadio Catch Diseases is a company specialist in detecting heart diseases in its early stages. Its business model is **As-a-Service**, which means that the company offers early diagnosis of cardiovascular disease for a certain price. The firm's price strategy is set as performance-based:
+
+- **The cost of each diagnosis is around $1,000.00** (including the devices and the payroll of the analysts). The price tag for the service varies according to the diagnosis precision achieved by the team of specialists;
+  - **The client pays $ 500.00 for every 5% increase in diagnosis precision rate above 50%**. For example, for a precision rate of 55 % the diagnosis costs $ 500.00 for the client, while for a rate of 60 %, the value is 1,000.00;
+  - If the diagnostic accuracy is 50% or below, the customer **does not pay** for the service.
+
+One of the main issues is: the variation in precision given by the team of specialists makes the company either have a profitable operation (revenue greater than the cost), or an operation with a loss (revenue less than the cost). This instability of the diagnosis makes the company to have an **unpredictable Cashflow**.
+
+### Business Solution
+
+The objective as a Data Scientist is to create a tool that **increases the precision of the diagnosis and that this precision is stable for all diagnoses**.
+
+Along with the tool, the following questions are going to be answered:
+- What is the Accuracy and Precision of the tool?
+- How much profit will Cardio Catch Diseases have with the new tool?
+- How Reliable is the result given by the new tool?
+
+## 2. Data Description
+
+The used data consists of specific information regarding 70,000 past patients and a target variable indicating the presence or not of cardiovascular disease. The features are all represented in the table below and included:
+
+- Objective features: factual information;
+- Subjective features: information given by the patient;
+- Examination features: results of medical examination.
+
+Variable | Feature Type	| Variable Name	| Data Type
+--- | --- | --- | --- 
+Age	| Objective Feature	| age	| numerical, discrete (days)
+Height | Objective Feature | height	| numerical, continuous (cm)
+Weight | Objective Feature | weight	| numerical, continuous (kg)
+Gender | Objective Feature | gender | categorical, binary (labels are unknown)
+Smoking	| Subjective Feature | smoke	| categorical, binary
+Alcohol intake | Subjective Feature | alcohol_intake | categorical, binary
+Physical activity | Subjective Feature | physical_activity | categorical, binary
+Systolic blood pressure	| Examination Feature	| systolic_bp | numerical, continuous (mmHg)
+Diastolic blood pressure | Examination Feature | diastolic_bp | numerical, continuous (mmHg)
+Cholesterol	| Examination Feature	| cholesterol	| 1: normal, 2: above normal, 3: well above normal
+Glucose	| Examination Feature	| glucose | 1: normal, 2: above normal, 3: well above normal
+Presence or absence of cardiovascular disease | Target Variable | cardio_disease | categorical, binary
+
+### Data Dimensions
+
+By analysing the raw data, the following dimension is found:
+
+- Number of rows: 70000 (which represents the quantity of patients)
+- Number of columns: 13 (for how many features are available)
+
+### Descriptive Statistics
+
+Before start working with any Data Science project, it is important to have a general notion of your data, allowing to describe your features in a more broaded extension.
+
+Descriptive statistics allows you to:
+- **Gain business knowledge**, from the statistics values such as mean, median, mode etc.;
+- **Detect some errors**, such as negative blood pressure, non-viable age, among others. 
+
+It is interesting to split this section into numerical variables (`int64` & `float64`) and categorical variables (`object`), once they differ in statistical analysis.
+
+#### Numerical variables
+
+![descriptive_statistics_table](img/descriptive_statistics_table.png)
+
+From the table above, it is possible to observe some inconsistencies in values, in which some features presents non-viable range of results. The following table presents which inconsistencies were found and which range of values was maintained from the raw data, in a process called **variable filtering**:
+
+Feature | Previous range | New range (after filtering)
+--- | --- | ---
+Height (m) | 0.55 to 2.5 | 1.20 to 2.10
+Weight (kg) | 10 to 200 | 40 to 180
+Systolic Blood Pressure | -150 to 16020 | 80 to 240
+Diastolic Blood Pressure | -70 to 11000 | 50 to 140
+
+Also, it can be seen that the variable `id` does not bring any relevant information regarding the patient's relation to cardiovascular disease, so this feature was removed within the filtering of the data.
+
+#### Categorical variables
+
+This dataset presents a significant amount of categorical variables: `gender`, `cholesterol`, `glucose`, `smoking`, `alcohol_intake` and `physical_activity` (as well as the target variable `cardio_disease`). Let's take a look on how some of the categorical features are related to the main variable:
+
+![descriptive_statistics_graphs](img/descriptive_statistics_graphs.png)
+
+
+## 3. Feature Engineering
+
+It is a hard task to find the best way to work with your data, but it normally starts with highlighting relevant information and removing noise. Besides, feature engineering process is very objective: consists of turning raw data into a numeric table without missing values.
+
+For helping on this task, a mindmap that relates objectives, subjectives and examination characteristics to the the risks of having CVD was created.
+
+![MindMap](img/CARDIOVASCULAR_DISEASES.png)
+
+### **New Features**
+
+By analysing the available data and the mindmap shown above, it is possible to see that some characteristics can be extracted and selected to give origin to new features. Those new features, derived from previous data, can better represent some main issues related to CVD and thus be used effectively in predictive models:
+- `bp_level`: categorical, with three labels (`normal`, `pre_hypertension` and `hypertension`), according to the patient's systolic blood pressure;
+- `BMI`: numerical, continuous variable indicating the body mass index (BMI) of the patient.
+
+## 4. Exploratory Data Analysis
+
+*To do*
+
+### 1. Univariate Analysis
+- **Target variable** (`cardio_disease`):
+  - Number of patients with CVD: 34,628
+  - Number of patients without CVD: 33,933
+![EDA_uni_target](img/EDA_uni_target.png)
+
+- **Numerical variables**:
+![EDA_uni_numerical](img/EDA_uni_numerical.png)
+
+Here some insights from the above graphs:
+- The dataset presents a concentration of patients aged 50 to 60;
+- The variable `height`distribution is concentrated around a height of 160cm;
+- The variable `weight` distribution is slightly shifted to the left (positive skew), and the data is concentrated around 70kg;
+- Systolic (`systolic_bp`) and Diastolic (`diastolic_bp`) measurements are concentrated around 120/80mmHg (normal blood pressure);
+- The `BMI` variable's distribution is slightly shifted to the left, concentrated around 25.
+
+- **Categorical variables**:
+![EDA_uni_categorical](img/EDA_uni_categorical.png)
+
+*To do*
+
+### 2. Bivariate Analysis
+*To do*
+
+### 3. Multivariate Analysis
+*To do*
+
+## 5. Machine Learning Models
+
+*To do*
+
+### Cross-Validation
+*To do*
+
+### Hyperparameter Fine Tuning
+*To do*
+
+## 6. Business Performance
+
+*To do*
