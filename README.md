@@ -4,7 +4,7 @@ Categorical classification forecast with Machine Learning.
 
 *(This README is under construction :D)*
 
-![Image](https://www.mayo.edu/-/media/kcms/gbs/research/images/2019/04/11/19/11/research-cohort-8col-shu-162680969.jpg)
+![Image](img/README_banner.png)
 
 *This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).*
 
@@ -17,7 +17,6 @@ If you want a better understanding on the motivation for this project and a broa
 Here is what I will cover:
 
 - [A brief introduction to CVDs](#a-brief-introduction-to-cdvs)
-- [Main outcomes](#main-outcomes)
 - [1. Business Problem](#1-business-problem)
 - [2. Data Description](#2-data-description)
 - [3. Feature Engineering](#3-feature-engineering)
@@ -27,10 +26,6 @@ Here is what I will cover:
 - [7. Business Performance](#7-business-performance)
 
 ## A brief introduction to CVDs
-
-*To do*
-
-## Main outcomes
 
 *To do*
 
@@ -204,6 +199,12 @@ Here are some observations for the target variable `cardio_disease`:
 
 ## 5. Data Preparation and Feature Selection
 
+The learning of ML algorithms is facilitated by the insertion of numerical data that are presented in the same scale, once:
+- Most ML algorithms work with optimization methods, which use many mathematical operations such as derivatives, sums, multiplications, among others, whereas the use of categorical variables becomes inviable;
+- The derivatives applied in most of these algorithms benefit variables with greater range (e.g. descending gradient of neural networks), giving greater importance to them; therefore, it is crucial to normalize those variables, as a way to inform the algorithm that they have the same information content.
+
+Therefore, this section is focused on the tools applied for both cases: either adapting the range of the variables by rescaling or converting categorical variables in numerical ones using encoding methods.
+
 ### Data Preparation
 
 - **Rescaling**: MinMaxScaler(), RobustScaler()
@@ -211,14 +212,27 @@ Here are some observations for the target variable `cardio_disease`:
 
 ### Feature Selection
 
-**Boruta** and Hypothesis table
+ML models learn best from a simpler dataset, and the simplicity of a dataset lies in the number of columns (features) that the dataset presents.
+
+This is where feature selection comes in: it is a method that uses algorithms in order to identify the relevance of the variables.
+
+In this section, the dataset was split into training and test datasets, in a randomly manner with a test size of 20 % of the original dataset.
+
+The feature selector used was **Boruta**, and this wrapper method-based algorithm has selected only one variable: `bp_level`. By adding the other Hypothesis table's features from the exploratory data analysis, the features to be trained are going to be `bp_level`, `age`, `cholesterol` and `BMI`.
 
 ## 6. Machine Learning Models
 
-*To do*
+Since this project aims to predict the existence or not of CVD by analysing labeled features, it requires a **supervised classification ML model**. Knowing that, three models are going to be tested and further compared:
+- Logistic Regression
+- Random Forest Classifier
+- Support Vector Classifier
+
+*To complete*
 
 ### Cross-Validation
-*To do*
+Choosing only one test dataset to define the performance of a model can lead to inaccurate results. Therefore, it is important to define the real performance of the machine learning models, understanding all the variability of the phenomenon from the measurement of the model's performance over various groups of data over the evaluated dataset. This technique of dividing the data set into several different subsets for testing the ML model is called Cross-Validation.
+
+*To complete*
 
 ### Hyperparameter Fine Tuning
 *To do*
@@ -237,4 +251,4 @@ For answering the three initial questions that motivated this project:
 - *How much profit will Cardio Catch Diseases have with the new tool?*
   - Considering the best scenario, the company would have a profit of **$ xx.xx million**
 - *How Reliable is the result given by the new tool?*
-  - 
+  - *To do*
