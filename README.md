@@ -6,9 +6,7 @@ Categorical classification forecast with Machine Learning.
 
 ![Image](img/README_banner.png)
 
-*This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).*
-
-(INTRO) *To do*
+This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).
 
 If you wish to check the coding for this project, access the Jupyter Notebook [here](v09-Cardio_Catch_Diseases.ipynb); there is also a Storytelling slide presentation available [here](Project_Storytelling.pdf).
 
@@ -25,9 +23,43 @@ Here is what I will cover:
 - [6. Machine Learning Models](#6-machine-learning-models)
 - [7. Business Performance](#7-business-performance)
 
+
 ## A brief introduction to CVDs
 
-*To do*
+According to the Medical News Today [[1]](#1),
+> The cardiovascular, or circulatory, system supplies the body with blood. It consists of the heart, arteries, veins, and capillaries.
+
+Cardiovascular disease (CVD) refers to several types of disease that involve the heart and blood vessels. It is classified into several categories, depending on the condition affecting the heart and the blood vessels. From the New York State Department of Health, it is shown that the most common types are:
+- Coronary heart disease (CHD), occurs when a substance called plaque builds up that narrows the arteries in the heart;
+- Stroke, also referred to as a brain attack, occurs when blood supply to the brain is blocked or a blood vessel in the brain bursts;
+- Congestive heart failure, wherein the heart cannot contract or relax normally;
+- Heart attack, when an artery becomes completely blocked, resulting in a lack of blood flow to the heart.
+
+It is possible to manage some health conditions within CVD by making lifestyle changes, but some conditions may be life threatening and require emergency surgery. Therefore, it is crucial to identify the possible risks in presenting a CVD and obtaining a diagnosis as soon as possible.
+
+### Main CVD causes
+
+The exact cause of CVD cannot be specifically pointed out, although there are conditions capable of increasing the risks of getting it. These are called "risk factors". In other words, the more risk factors you present, the greater are your chances of developing a CVD.
+
+According to the United Kingdom National Health Service [[2]](#2)., the main risks factors identified are as listed:
+- **Hypertension**: one of the most important risk factors for CVD, once a too high blood pressure can damage blood vessels;
+- **Smoking**:the harmful substances in tobacco can damage and narrow blood vessels;
+- **High cholesterol**: cholesterol is a fatty substance found in the blood, and when in large amount can cause your blood vessels to narrow and increase your risk of developing a blood clot;
+- **Diabetes**: a lifelong condition that causes your blood sugar level to become too high, and high blood sugar levels can damage the blood vessels, making them more likely to become narrowed; moreover, many people with type 2 diabetes are also overweight or obese, which is also a risk factor for CVD;
+- **Inactivity**: the absence of regular exercise makes more likely for a individual to present high blood pressure, high cholesterol levels and be overweight, all of these are risk factors for CVD;
+- **Being overweight or obese**: those conditions increases your risk of developing diabetes and high blood pressure, both of which are risk factors for CVD;
+  - an increased risk of CVD is observed if the body mass index (BMI) is 25 or above;
+- **Family history of CVD**: a family history of CVD increases the risk of developing one, according to the following:
+  - father or brother were diagnosed with CVD before they were 55;
+  - mother or sister were diagnosed with CVD before they were 65;
+- **Ethnic background**: people from some origins are more likely to have other risk factors for CVD, such as high blood pressure or diabetes;
+
+**Other listed risk factors** include:
+- age – CVD is most common in people over 50 and the risk of developing it increases within the age;
+- gender – men are more likely to develop CVD at an earlier age than women;
+- diet – an unhealthy diet can lead to high cholesterol and high blood pressure;
+- alcohol – excessive alcohol consumption can also increase cholesterol and blood pressure levels, and contribute to weight gain.
+
 
 ## 1. Business Problem
 
@@ -47,6 +79,7 @@ Along with the tool, the following questions are going to be answered:
 - What is the Accuracy and Precision of the tool?
 - How much profit will Cardio Catch Diseases have with the new tool?
 - How Reliable is the result given by the new tool?
+
 
 ## 2. Data Description
 
@@ -124,6 +157,7 @@ By analysing the available data and the mindmap shown above, it is possible to s
 - `bp_level`: categorical, with three labels (`normal`, `pre_hypertension` and `hypertension`), according to the patient's systolic blood pressure;
 - `BMI`: numerical, continuous variable indicating the body mass index (BMI) of the patient.
 
+
 ## 4. Exploratory Data Analysis
 
 The Exploratory Data Analysis (also known as EDA) is used to measure the impact of variables in relation to the response variable and, often, to try to quantify that impact. It allows a greater sense of how the data behaves, what data is impacting and what variables should be prioritized in the ML model.
@@ -199,16 +233,19 @@ Here are some observations for the target variable `cardio_disease`:
 
 ## 5. Data Preparation and Feature Selection
 
+### Data Preparation
+
 The learning of ML algorithms is facilitated by the insertion of numerical data that are presented in the same scale, once:
 - Most ML algorithms work with optimization methods, which use many mathematical operations such as derivatives, sums, multiplications, among others, whereas the use of categorical variables becomes inviable;
 - The derivatives applied in most of these algorithms benefit variables with greater range (e.g. descending gradient of neural networks), giving greater importance to them; therefore, it is crucial to normalize those variables, as a way to inform the algorithm that they have the same information content.
 
 Therefore, this section is focused on the tools applied for both cases: either adapting the range of the variables by rescaling or converting categorical variables in numerical ones using encoding methods.
 
-### Data Preparation
-
-- **Rescaling**: MinMaxScaler(), RobustScaler()
-- **Encoding**: OrdinalEncoder
+- **Rescaling**: 
+  - MinMaxScaler() for `age`, `weight` and `BMI`;
+  - RobustScaler() for `systolic_bp` and `diastolic_bp`;
+- **Encoding**: 
+  - OrdinalEncoder for `gender`, `cholesterol`, `glucose` and `bp_level`.
 
 ### Feature Selection
 
@@ -252,3 +289,8 @@ For answering the three initial questions that motivated this project:
   - Considering the best scenario, the company would have a profit of **$ xx.xx million**
 - *How Reliable is the result given by the new tool?*
   - *To do*
+  
+  ## References
+  
+  <a id="1">[1]</a> 
+  <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2020.
