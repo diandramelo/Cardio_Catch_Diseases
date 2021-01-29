@@ -2,8 +2,6 @@
 
 Binary classification forecast with Machine Learning.
 
-*(This README is under construction :D)*
-
 ![Image](img/README_banner.png)
 
 This Data Science project presents a classification problem of predicting the existence of cardiovascular disease on patients based on a group of objective, subjective and examinational features. For that, 70,000 patient records are going to be considered as part of a fictional healthcare firm called Cardio Catch Diseases. The project was inspired in a database available from a [Kaggle competition](https://www.kaggle.com/sulianova/cardiovascular-disease-dataset).
@@ -324,4 +322,4 @@ For answering the three initial questions that motivated this project:
   <a id="1">[1]</a> Medical News Today (2019). *What to know about cardiovascular disease*. Available in <https://www.medicalnewstoday.com/articles/257484#symptoms>, accessed in 20/01/2021.
   <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2021.
   <a id="3">[3]</a> Thomas Wood, for DeepAI. *F-Score*. Available in <https://deepai.org/machine-learning-glossary-and-terms/f-score>, accessed in 22/01/2021.
-  <a id="4">[4]</a> https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5
+  <a id="4">[4]</a> Sarang Narkhede (2018). *Understanding AUC - ROC Curve*. Available in <https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5>, accessed in 23/01/2021.
