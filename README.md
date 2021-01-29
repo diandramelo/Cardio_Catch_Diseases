@@ -1,6 +1,6 @@
 # Cardio_Catch_Diseases
 
-Categorical classification forecast with Machine Learning.
+Binary classification forecast with Machine Learning.
 
 *(This README is under construction :D)*
 
@@ -65,6 +65,7 @@ According to the United Kingdom National Health Service [[2]](#2)., the main ris
 
 Cadio Catch Diseases is a company specialist in detecting heart diseases in its early stages. Its business model is **As-a-Service**, which means that the company offers early diagnosis of cardiovascular disease for a certain price. The firm's price strategy is set as performance-based:
 
+- Currently, the diagnosis is made manually by a team of specialists. The current accuracy of the diagnosis **varies between 55% and 65%**, due to the complexity of the diagnosis and also the fatigue of the team who take turns to minimize the risks;
 - **The cost of each diagnosis is around $ 1,000.00** (including the devices and the payroll of the analysts). The price tag for the service varies according to the diagnosis precision achieved by the team of specialists;
   - **The client pays $ 500.00 for every 5 % increase in diagnosis precision rate above 50 %**. For example, for a precision rate of 55 % the diagnosis costs $ 500.00 for the client, while for a rate of 60 %, the value is 1,000.00;
   - If the diagnostic accuracy is 50 % or below, the customer **does not pay** for the service.
@@ -259,38 +260,68 @@ The feature selector used was **Boruta**, and this wrapper method-based algorith
 
 ## 6. Machine Learning Models
 
-Since this project aims to predict the existence or not of CVD by analysing labeled features, it requires a **supervised classification ML model**. Knowing that, three models are going to be tested and further compared:
+Since this project aims to predict the existence or not of CVD by analysing labeled features, it requires a **supervised binary classification ML model**. Knowing that, three models are going to be tested and further compared:
 - Logistic Regression
 - Random Forest Classifier
 - Support Vector Classifier
 
-*To complete*
+### Analysed metrics
+
+- Accuracy: represents the number of correct predictions made divided by the total number of predictions made;
+- Precision: indicates the fraction of true positive examples among all the examples that the model classified as positive (number of false positives plus true positives);
+- Recall: also known as sensitivity, is the fraction of examples classified as positive among the total number of positive examples (the number of true positives plus false negatives);
+- F1-Score: it is used to evaluate binary classification systems (‘positive’ or ‘negative’), by combining the precision and recall of the model in a geometric mean.
+- AUC-ROC: stands for AUC (Area Under The Curve) ROC (Receiver Operating Characteristics) and is used for checking classification model’s performance, where higher the AUC, the better the model is at predicting 0s as 0s and 1s as 1s.
+
+*Those concepts were taken from references [[3]](#3) and [[4]](#4).*
+ 
+Since this project involves the increase in profit for the company by reaching a 5% increase in precision for the CVD diagnosis, this will be the key metric for choosing the model to be used.
+
+![ML_results_table](img/ML_results_table.png)
 
 ### Cross-Validation
 Choosing only one test dataset to define the performance of a model can lead to inaccurate results. Therefore, it is important to define the real performance of the machine learning models, understanding all the variability of the phenomenon from the measurement of the model's performance over various groups of data over the evaluated dataset. This technique of dividing the data set into several different subsets for testing the ML model is called Cross-Validation.
 
-*To complete*
+*To complete* StratifiedKFold(n_splits = 10, random_state = None)
+
+![ML_results_table_cv](img/ML_results_table_cv.png)
+
+Since **Logistic Regression** presented best precision results, this model was chosen to be further developed into this project.
 
 ### Hyperparameter Fine Tuning
-*To do*
+In Machine Learning, hyperparameters are all parameters that the model uses to be able to learn a behavior. The motivation is to obtain the set of values that, when applied to the parameters, maximize the learning of the model and, therefore, improve its performance.
+
+**Grid Search**: tests all possible combinations between the hyperparameters chosen to be applied to the model, in order to define the smallest possible error (highest performance).
+
+Parameters tested:
+1. `penalty`: used to specify the norm used in the penalization; it can be `l1` (Lasso Regression) or `l2` (Ridge Regression).
+2. `C`: penality strength, meant to disincentivize and regulate against overfitting.
+
+After grid search fine tuning, the following configuration for the Logistic Regression model was defined: **{'C': 1, 'penalty': 'l2'}**. The results are shown in the table below.
+
+![ML_tuning_results_table](img/ML_tuning_results_table.png)
+
+Despite presenting a better F1 Score, the precision percentage from the logistic regression tuned model presented lower results than the cross-validated logistic regression model. Therefore, the second one is going to be defined as the final model.
 
 ## 7. Business Performance
 
-Overall, as shown in the previous section, the chosen model generates CVD predictions with a precision rate between **xx.xx %** and **xx.xx %**. 
+Overall, as shown in the previous section, the chosen model generates CVD predictions with a precision rate of **76.22 %**. 
 
 From the informations given in the [Business Problem section](#1-business-problem), it is possible to conclude that:
-- The current operation (software solution) would have **a debt of around $ 35 million in the worst scenario**, and would have **a profit of around $ 35 million in the best scenario**;
-- Under the model built in this project, the firm would never present deficit values: **in the worst scenario**, it would present **a profit of around $ xx million**; **in the best scenario**, **profit would be $ xx million**.
+- The current operation (software solution) would have **a debt of $ 34.3 million in the worst scenario**, and would have **a profit of almost $ 34,3 million in the best scenario**; 
+- Under the model built in this project, the firm would present **a profit of $ 102,841,500 million**, an improvement of 75 % comparing to the old tool most profitable condition.
 
 For answering the three initial questions that motivated this project:
 - *What is the Accuracy and Precision of the tool?*
-  - The ___ model used presents **an accuracy of xx.xx %** and **a precision of xx.xx %**.
+  - The logistic regression cross-validated model used presents **an accuracy of 72.38 %** and **a precision of 76.22 %**.
 - *How much profit will Cardio Catch Diseases have with the new tool?*
-  - Considering the best scenario, the company would have a profit of **$ xx.xx million**
+  - Considering the best scenario, the company would have a profit of **$ 102,841,500 million**.
 - *How Reliable is the result given by the new tool?*
-  - *To do*
+  - According to the AUC ROC of the model chosen, this tool is **72.31 %** reliable.
   
   ## References
   
-  <a id="1">[1]</a> 
-  <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2020.
+  <a id="1">[1]</a> Medical News Today (2019). *What to know about cardiovascular disease*. Available in <https://www.medicalnewstoday.com/articles/257484#symptoms>, accessed in 20/01/2021.
+  <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2021.
+  <a id="3">[3]</a> Thomas Wood, for DeepAI. *F-Score*. Available in <https://deepai.org/machine-learning-glossary-and-terms/f-score>, accessed in 22/01/2021.
+  <a id="4">[4]</a> https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5
