@@ -194,7 +194,7 @@ A well-executed EDA allows you to gain business experience, validate market hypo
 
 From the previous researches made in CVD and by using the MindMap shown in the [Feature Engineering](#feature-engineering) section of this *readme*, nine hypothesis for how the given features on this dataset are related to the target variable were created, and by using EDA it was possible to decide whether the hypothesis is true or false for the case study and try to understand what level of impact it may have on the model (low, medium, high).
 
-The list of hypothesis can be found in the table below. For more details on the Bivariate EDA, please check the [Jupiter Notebook code](v09-Cardio_Catch_Diseases.ipynb).
+The list of hypothesis can be found in the table below. For more details on the Bivariate EDA, please check the [Jupiter Notebook code](Cardio_Catch_Diseases.ipynb).
 
 Hypothesis                                                                                             | Conclusion   | Relevance
 ------------------------------------------------------------------------------------------------------ | ------------ | -----------
@@ -319,7 +319,7 @@ For answering the three initial questions that motivated this project:
   
   ## References
   
-  <a id="1">[1]</a> Medical News Today (2019). *What to know about cardiovascular disease*. Available in <https://www.medicalnewstoday.com/articles/257484#symptoms>, accessed in 20/01/2021.
-  <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2021.
-  <a id="3">[3]</a> Thomas Wood, for DeepAI. *F-Score*. Available in <https://deepai.org/machine-learning-glossary-and-terms/f-score>, accessed in 22/01/2021.
-  <a id="4">[4]</a> Sarang Narkhede (2018). *Understanding AUC - ROC Curve*. Available in <https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5>, accessed in 23/01/2021.
+  <a id="1">[1]</a> Medical News Today (2019). *What to know about cardiovascular disease*. Available in <https://www.medicalnewstoday.com/articles/257484#symptoms>, accessed in 20/01/2021.<br>
+  <a id="2">[2]</a> United Kingdom National Health Service (2018). *Cardiovascular disease*. Available in <https://www.nhs.uk/conditions/cardiovascular-disease/>, accessed in 20/01/2021.<br>
+  <a id="3">[3]</a> Thomas Wood, for DeepAI. *F-Score*. Available in <https://deepai.org/machine-learning-glossary-and-terms/f-score>, accessed in 22/01/2021.<br>
+  <a id="4">[4]</a> Sarang Narkhede (2018). *Understanding AUC - ROC Curve*. Available in <https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5>, accessed in 23/01/2021.<br>
